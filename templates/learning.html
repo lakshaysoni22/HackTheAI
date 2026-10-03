@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Learning - HACK THE AI{% endblock %}
+{% block page_title %}Learning Paths{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="card elevated" style="margin-bottom: var(--space-6);">
+        <h3 style="margin-bottom: var(--space-2);">Cybersecurity Foundations</h3>
+        <p class="text-secondary" style="margin-bottom: var(--space-4);">Master the basics of web security, networks, and operating systems.</p>
+        <div style="background-color: var(--bg-primary); height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: var(--space-2);">
+            <div style="background-color: var(--accent); width: 25%; height: 100%;"></div>
+        </div>
+        <p class="text-sm text-muted">25% Completed</p>
+    </div>
+    
+    <div class="card elevated" style="margin-bottom: var(--space-6); opacity: 0.7;">
+        <h3 style="margin-bottom: var(--space-2);">Advanced Web Exploitation</h3>
+        <p class="text-secondary" style="margin-bottom: var(--space-4);">Dive deep into blind SQLi, complex XSS, and SSRF attacks.</p>
+        <div style="background-color: var(--bg-primary); height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: var(--space-2);">
+            <div style="background-color: var(--accent); width: 0%; height: 100%;"></div>
+        </div>
+        <p class="text-sm text-muted">0% Completed (Unlock by finishing Foundations)</p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}{{ lab.name }} - HACK THE AI{% endblock %}
+{% block page_title %}{{ lab.name }}{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/labs.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="page-container" style="max-width: 1000px;">
+    
+    <a href="{{ url_for('labs.labs') }}" class="btn btn-secondary btn-sm" style="margin-bottom: var(--space-4);">
+        ← Back to Labs
+    </a>
+
+    <div class="lab-detail-header">
+        <div style="display: flex; gap: var(--space-2); margin-bottom: var(--space-4);">
+            <span class="badge badge-secondary">{{ lab.topic }}</span>
+            <span class="badge badge-success">{{ 'Pro' if lab.difficulty == 'Intermediate' else lab.difficulty }}</span>
+            <span class="badge badge-info">250 XP</span>
+        </div>
+        
+        <h1 style="font-size: 2.5rem; margin-bottom: var(--space-4);">{{ lab.name }}</h1>
+        <p style="font-size: 1.125rem; max-width: 800px; color: var(--text-primary);">
+            {{ lab.description }}
+        </p>
+        
+        <div style="display: flex; gap: var(--space-4); margin-top: var(--space-6);">
+            {% if lab.id == 'lab6' %}
+            <a href="{{ url_for('labs.ghost_ledger_workstation') }}" class="btn btn-primary btn-lg">
+                🔍 Enter Investigation
+            </a>
+            {% else %}
+            <a href="{{ url_for('labs.workstation', lab_id=lab.id) }}" class="btn btn-primary btn-lg">
+                Enter Workstation
+            </a>
+            {% endif %}
+            <button type="button" onclick="restartLab('{{ lab.id }}')" class="btn btn-outline btn-lg" id="restart-lab-btn">
+                🔄 Restart Lab
+            </button>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3 style="margin-bottom: var(--space-4);">Learning Objectives</h3>
+        <ul style="margin-bottom: var(--space-6); margin-left: var(--space-4); color: var(--text-secondary); list-style-type: disc;">
+            <li>Understand the core concepts of {{ lab.topic }}.</li>
+            <li>Identify vulnerabilities in simulated environments.</li>
+            <li>Exploit security misconfigurations.</li>
+            <li>Learn mitigation and defense strategies.</li>
+        </ul>
+
+        <h3 style="margin-bottom: var(--space-4);">Missions</h3>
+        <div class="mission-list">
+            <!-- We don't have mission details directly in the lab object based on the current app.py, 
+                 so we'll create a nice placeholder or fetch them if they were passed. 
+                 Since the route `lab_detail(lab_id)` only fetches `lab`, we use a generic representation. -->
+            <div class="mission-item">
+                <div class="mission-status-icon completed">✓</div>
+                <div class="mission-info">
+                    <h4>Mission 1: Reconnaissance</h4>
+                    <span class="text-secondary" style="font-size: 0.875rem;">Explore the target environment.</span>
+                </div>
+            </div>
+            <div class="mission-item">
+                <div class="mission-status-icon inprogress">●</div>
+                <div class="mission-info">
+                    <h4>Mission 2: Vulnerability Discovery</h4>
+                    <span class="text-secondary" style="font-size: 0.875rem;">Identify the primary flaw.</span>
+                </div>
+            </div>
+            <div class="mission-item">
+                <div class="mission-status-icon locked">🔒</div>
+                <div class="mission-info">
+                    <h4 class="text-muted">Mission 3: Exploitation</h4>
+                    <span class="text-muted" style="font-size: 0.875rem;">Capture the flag.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function restartLab(labId) {
+    if (!confirm('Are you sure you want to restart this lab? Your progress will be reset.')) return;
+    fetch('/api/lab/restart', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': window.csrfToken
+        },
+        body: JSON.stringify({ lab_id: labId })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            window.location.reload();
+        } else {
+            alert(data.message || 'Failed to restart lab');
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert('Network error. Could not restart lab.');
+    });
+}
+</script>
+{% endblock %}

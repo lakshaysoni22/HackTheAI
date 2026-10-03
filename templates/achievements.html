@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Achievements - HACK THE AI{% endblock %}
+{% block page_title %}Achievements{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="card elevated">
+        <h3 style="margin-bottom: var(--space-6);">Your Trophy Room</h3>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: var(--space-4);">
+            <!-- Mock Achievements -->
+            <div class="card" style="text-align: center; background-color: rgba(16, 185, 129, 0.05); border-color: var(--success);">
+                <div style="font-size: 3rem; margin-bottom: var(--space-2);">🎯</div>
+                <h4 style="margin-bottom: var(--space-1);">First Blood</h4>
+                <p class="text-secondary text-sm">Completed your first lab.</p>
+                <span class="badge badge-success" style="margin-top: var(--space-2);">Unlocked</span>
+            </div>
+            
+            <div class="card" style="text-align: center; background-color: rgba(16, 185, 129, 0.05); border-color: var(--success);">
+                <div style="font-size: 3rem; margin-bottom: var(--space-2);">🕵️</div>
+                <h4 style="margin-bottom: var(--space-1);">Eagle Eye</h4>
+                <p class="text-secondary text-sm">Found 5 hidden evidences.</p>
+                <span class="badge badge-success" style="margin-top: var(--space-2);">Unlocked</span>
+            </div>
+            
+            <div class="card" style="text-align: center; opacity: 0.6; filter: grayscale(100%);">
+                <div style="font-size: 3rem; margin-bottom: var(--space-2);">🔥</div>
+                <h4 style="margin-bottom: var(--space-1);">Unstoppable</h4>
+                <p class="text-secondary text-sm">Maintain a 7-day streak.</p>
+                <span class="badge badge-secondary" style="margin-top: var(--space-2);">Locked</span>
+            </div>
+            
+            <div class="card" style="text-align: center; opacity: 0.6; filter: grayscale(100%);">
+                <div style="font-size: 3rem; margin-bottom: var(--space-2);">👑</div>
+                <h4 style="margin-bottom: var(--space-1);">Master Hacker</h4>
+                <p class="text-secondary text-sm">Complete all beginner labs.</p>
+                <span class="badge badge-secondary" style="margin-top: var(--space-2);">Locked</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
