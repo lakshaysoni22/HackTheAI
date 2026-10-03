@@ -39,3 +39,5 @@ locustfile.py
 
 # Migrations (auto-generated, keep folder structure)
 migrations/versions/__pycache__/
+
+.vercel
